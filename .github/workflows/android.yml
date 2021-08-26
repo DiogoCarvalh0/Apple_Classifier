@@ -174,12 +174,11 @@ jobs:
 
       - name: upload apk
         id: upload_release_asset
-        working-directory: ./android
         uses: actions/upload-release-asset@v1.0.1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./app-release.apk
+          asset_path: ./android/app-release.apk
           asset_name: release.apk
           asset_content_type: application/zip
