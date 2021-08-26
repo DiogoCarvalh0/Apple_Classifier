@@ -28,7 +28,8 @@ jobs:
           key: gradle-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/buildSrc/**/*.kt') }}
 
       - name: unit tests
-        run: ./android/gradlew testDebugUnitTest
+        working-directory: ./android
+        run: ./gradlew testDebugUnitTest
 
       - name: verify test results
         uses: asadmansr/android-test-report-action@v1.2.0
@@ -54,7 +55,8 @@ jobs:
           key: gradle-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/buildSrc/**/*.kt') }}
 
       - name: run detekt + ktlint
-        run: ./android/gradlew detekt
+        working-directory: ./android
+        run: ./gradlew detekt
 
   ui_tests:
     runs-on: macos-latest
@@ -100,6 +102,7 @@ jobs:
           script: echo "Generated AVD snapshot for caching."
 
       - name: ui tests
+        working-directory: ./android
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: ${{ matrix.sdk }}
@@ -107,7 +110,7 @@ jobs:
           profile: ${{ matrix.profile }}
           emulator-options: -no-snapshot-save -no-window -noaudio -no-boot-anim -camera-back none
           disable-animations: true
-          script: ./android/gradlew connectedCheck
+          script: ./gradlew connectedCheck
 
   build:
     runs-on: ubuntu-latest
@@ -130,14 +133,16 @@ jobs:
           key: gradle-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/buildSrc/**/*.kt') }}
 
       - name: prepare keystore
+        working-directory: ./android
         env:
           ENCODED_STRING: ${{ secrets.APPLE_CLASSIFIER_KEYSTORE }}
         run: |
-          mkdir ./android/secrets/
-          echo $ENCODED_STRING | base64 -di > ./android/secrets/release.jks
+          mkdir ./secrets/
+          echo $ENCODED_STRING | base64 -di > ./secrets/release.jks
 
       - name: building
-        run: ./android/gradlew assembleRelease
+        working-directory: ./android
+        run: ./gradlew assembleRelease
         env:
           VERSION_NAME: ${{ github.ref }}
           APPLE_CLASSIFIER_KEY: ${{ secrets.APPLE_CLASSIFIER_KEY }}
@@ -170,11 +175,12 @@ jobs:
 
       - name: upload apk
         id: upload_release_asset
+        working-directory: ./android
         uses: actions/upload-release-asset@v1.0.1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./android/app-release.apk
+          asset_path: ./app-release.apk
           asset_name: release.apk
           asset_content_type: application/zip
