@@ -1,0 +1,36 @@
+ext {
+    versions = [
+            activityKtx : '1.3.1',
+            appcompat   : '1.3.1',
+            compose     : '1.0.1',
+            coreKtx     : '1.6.0',
+            coroutines  : '1.5.0',
+            detekt      : '1.18.0',
+            gradleTools : '7.0.1',
+            hilt        : '2.38.1',
+            junit       : '4.13.2',
+            kotlin      : '1.5.21',
+            material    : '1.4.0',
+            mockito     : '3.2.0'
+    ]
+
+    dependencies = [
+            activityCompose     : "androidx.activity:activity-compose:${versions.activityKtx}",
+            activityKtx         : "androidx.activity:activity-ktx:${versions.activityKtx}",
+            appCompat           : "androidx.appcompat:appcompat:${versions.appcompat}",
+            composeAnimation    : "androidx.compose.animation:animation:${versions.compose}",
+            composeJunit        : "androidx.compose.ui:ui-test-junit4:${versions.compose}",
+            composeMaterial     : "androidx.compose.material:material:${versions.compose}",
+            composeTestManifest : "androidx.compose.ui:ui-test-manifest:${versions.compose}",
+            composeUITest       : "androidx.compose.ui:ui-test:${versions.compose}",
+            composeUITooling    : "androidx.compose.ui:ui-tooling:${versions.compose}",
+            coreKtx             : "androidx.core:core-ktx:${versions.coreKtx}",
+            coroutines          : "org.jetbrains.kotlinx:kotlinx-coroutines-android:${versions.coroutines}",
+            detektKtlint        : "io.gitlab.arturbosch.detekt:detekt-formatting:${versions.detekt}",
+            hilt                : "com.google.dagger:hilt-android:${versions.hilt}",
+            hiltCompiler        : "com.google.dagger:hilt-compiler:${versions.hilt}",
+            junit               : "junit:junit:${versions.junit}",
+            material            : "com.google.android.material:material:${versions.material}",
+            mockito             : "org.mockito.kotlin:mockito-kotlin:${versions.mockito}"
+    ]
+}

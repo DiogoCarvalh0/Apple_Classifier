@@ -1,0 +1,41 @@
+ext.code = { ->
+    def versionCode = System.getenv('VERSION_CODE')
+
+    if (versionCode != null) {
+        return Integer.parseInt(versionCode)
+    }
+
+    try {
+        def stdout = new ByteArrayOutputStream()
+        exec {
+            commandLine 'git', 'rev-list', '--first-parent', '--count', 'main'
+            standardOutput = stdout
+        }
+
+        return Integer.parseInt(stdout.toString().trim())
+    }
+    catch (ignored) {
+        return 1
+    }
+}
+
+ext.name = { ->
+    def versionName = System.getenv('VERSION_NAME')
+
+    if (versionName != null) {
+        return versionName.replace('v', '')
+    }
+
+    try {
+        def stdout = new ByteArrayOutputStream()
+        exec {
+            commandLine 'git', 'describe', '--abbrev=0'
+            standardOutput = stdout
+        }
+
+        return stdout.toString().trim().replace('v', '')
+    }
+    catch (ignored) {
+        return null
+    }
+}
