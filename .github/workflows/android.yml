@@ -102,7 +102,6 @@ jobs:
           script: echo "Generated AVD snapshot for caching."
 
       - name: ui tests
-        working-directory: ./android
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: ${{ matrix.sdk }}
@@ -110,7 +109,7 @@ jobs:
           profile: ${{ matrix.profile }}
           emulator-options: -no-snapshot-save -no-window -noaudio -no-boot-anim -camera-back none
           disable-animations: true
-          script: ./gradlew connectedCheck
+          script: ./android/gradlew connectedCheck
 
   build:
     runs-on: ubuntu-latest
