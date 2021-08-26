@@ -1,7 +1,12 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'dagger.hilt.android.plugin'
+    id 'kotlin-kapt'
 }
+
+String KEY = System.getenv('APPLE_CLASSIFIER_KEY')
+String PASSWORD = System.getenv('APPLE_CLASSIFIER_PASSWORD')
 
 android {
     compileSdk 31
@@ -10,56 +15,86 @@ android {
         applicationId "pt.carvalho.apples.classifier"
         minSdk 21
         targetSdk 31
-        versionCode 1
-        versionName "1.0"
+        versionCode rootProject.ext.code()
+        versionName rootProject.ext.name()
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
         vectorDrawables {
             useSupportLibrary true
         }
     }
 
-    buildTypes {
+    buildFeatures {
+        compose true
+    }
+
+    testOptions {
+        reportDir = "$project.buildDir/testResults"
+    }
+
+    signingConfigs {
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            storeFile rootProject.file('./secrets/release.jks')
+            keyAlias KEY
+            keyPassword PASSWORD
+            storePassword PASSWORD
         }
     }
+
+    buildTypes {
+        debug {
+            minifyEnabled false
+            shrinkResources false
+            applicationIdSuffix '.debug'
+        }
+
+        release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    kotlinOptions {
-        jvmTarget = '1.8'
-        useIR = true
-    }
-    buildFeatures {
-        compose true
-    }
+
     composeOptions {
-        kotlinCompilerExtensionVersion compose_version
-        kotlinCompilerVersion '1.5.21'
+        kotlinCompilerExtensionVersion rootProject.ext.versions.compose
     }
+
     packagingOptions {
         resources {
             excludes += '/META-INF/{AL2.0,LGPL2.1}'
         }
     }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
 }
 
 dependencies {
+    implementation rootProject.ext.dependencies.activityCompose
+    implementation rootProject.ext.dependencies.activityKtx
+    implementation rootProject.ext.dependencies.appCompat
+    implementation rootProject.ext.dependencies.composeAnimation
+    implementation rootProject.ext.dependencies.composeMaterial
+    implementation rootProject.ext.dependencies.composeUITooling
+    implementation rootProject.ext.dependencies.coreKtx
+    implementation rootProject.ext.dependencies.hilt
+    implementation rootProject.ext.dependencies.coroutines
+    implementation rootProject.ext.dependencies.material
 
-    implementation 'androidx.core:core-ktx:1.6.0'
-    implementation 'androidx.appcompat:appcompat:1.3.1'
-    implementation 'com.google.android.material:material:1.4.0'
-    implementation "androidx.compose.ui:ui:$compose_version"
-    implementation "androidx.compose.material:material:$compose_version"
-    implementation "androidx.compose.ui:ui-tooling-preview:$compose_version"
-    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.1'
-    implementation 'androidx.activity:activity-compose:1.3.1'
-    testImplementation 'junit:junit:4.+'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
-    androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_version"
-    debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
+    kapt rootProject.ext.dependencies.hiltCompiler
+
+    testImplementation rootProject.ext.dependencies.junit
+    testImplementation rootProject.ext.dependencies.mockito
+
+    debugImplementation rootProject.ext.dependencies.composeTestManifest
+    androidTestImplementation rootProject.ext.dependencies.composeJunit
+    androidTestImplementation rootProject.ext.dependencies.composeUITest
 }
