@@ -14,11 +14,33 @@ class BitmapUtilitiesTest {
     }
 
     @Test
-    fun when_centerSquareCrop_is_called_with_a_bigger_size_than_the_bitmap_we_resize_it_instead() {
+    fun when_centerSquareCrop_is_called_with_a_bigger_size_than_the_squre_bitmap_we_resize_it_instead() {
         val expectedSize = 1024
 
         runTest(
             testFile = SQUARE,
+            expectedFile = "expected/square_resize_$expectedSize.png",
+            size = expectedSize
+        )
+    }
+
+    @Test
+    fun when_centerSquareCrop_is_called_on_a_image_with_bigger_width_with_a_bigger_size_than_the_bitmap_we_resize_it_instead() {
+        val expectedSize = 1024
+
+        runTest(
+            testFile = WIDTH,
+            expectedFile = "expected/square_resize_$expectedSize.png",
+            size = expectedSize
+        )
+    }
+
+    @Test
+    fun when_centerSquareCrop_is_called_on_a_image_with_bigger_height_with_a_bigger_size_than_the_bitmap_we_resize_it_instead() {
+        val expectedSize = 1024
+
+        runTest(
+            testFile = HEIGHT,
             expectedFile = "expected/square_resize_$expectedSize.png",
             size = expectedSize
         )
@@ -47,7 +69,7 @@ class BitmapUtilitiesTest {
     }
 
     @Test
-    fun when_centerSquareCrop_is_called_on_a_image_bigger_width_we_crop_it_from_the_center() {
+    fun when_centerSquareCrop_is_called_on_a_image_with_bigger_width_we_crop_it_from_the_center() {
         val expectedSize = 1000
 
         runTest(
@@ -58,7 +80,7 @@ class BitmapUtilitiesTest {
     }
 
     @Test
-    fun when_centerSquareCrop_is_called_on_a_image_bigger_height_we_crop_it_from_the_center() {
+    fun when_centerSquareCrop_is_called_on_a_image_with_bigger_height_we_crop_it_from_the_center() {
         val expectedSize = 1000
 
         runTest(
