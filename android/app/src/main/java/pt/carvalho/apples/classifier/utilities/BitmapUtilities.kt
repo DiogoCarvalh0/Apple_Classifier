@@ -1,6 +1,7 @@
 package pt.carvalho.apples.classifier.utilities
 
 import android.graphics.Bitmap
+import android.graphics.Matrix
 import java.lang.IllegalArgumentException
 import kotlin.math.min
 
@@ -26,6 +27,14 @@ internal fun Bitmap.centerSquareCrop(size: Int): Bitmap {
     } else {
         croppedBitmap
     }
+}
+
+internal fun Bitmap.rotate(degrees: Float): Bitmap {
+    val matrix = Matrix().apply {
+        postRotate(degrees)
+    }
+
+    return Bitmap.createBitmap(this, 0, 0, width, height, matrix, true)
 }
 
 private fun crop(
