@@ -1,4 +1,4 @@
-package pt.carvalho.apples.classifier.processing
+package pt.carvalho.apples.classifier.processing.converter
 
 import android.annotation.SuppressLint
 import android.graphics.Bitmap
@@ -13,7 +13,7 @@ import java.io.ByteArrayOutputStream
 
 private const val QUALITY = 50
 
-internal class FrameConvertor(
+internal class FrameConverter(
     val process: (Bitmap) -> Unit
 ) : ImageAnalysis.Analyzer {
 

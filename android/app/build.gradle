@@ -42,6 +42,10 @@ android {
         }
     }
 
+    aaptOptions {
+        noCompress "tflite"
+    }
+
     buildTypes {
         debug {
             minifyEnabled false
@@ -86,11 +90,15 @@ dependencies {
     implementation rootProject.ext.dependencies.cameraXView
     implementation rootProject.ext.dependencies.composeAnimation
     implementation rootProject.ext.dependencies.composeMaterial
+    implementation rootProject.ext.dependencies.composePermissions
     implementation rootProject.ext.dependencies.composeUITooling
     implementation rootProject.ext.dependencies.coreKtx
     implementation rootProject.ext.dependencies.hilt
     implementation rootProject.ext.dependencies.coroutines
     implementation rootProject.ext.dependencies.material
+    implementation rootProject.ext.dependencies.tensorflow
+    implementation rootProject.ext.dependencies.tensorflowGPU
+    implementation rootProject.ext.dependencies.tensorflowSupport
 
     kapt rootProject.ext.dependencies.hiltCompiler
 
