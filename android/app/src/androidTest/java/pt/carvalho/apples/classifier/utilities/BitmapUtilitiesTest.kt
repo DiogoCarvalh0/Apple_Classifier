@@ -90,6 +90,16 @@ class BitmapUtilitiesTest {
         )
     }
 
+    @Test
+    fun rotate_rotates_bitmap_correctly() {
+        val bitmap = assets(ARROW_LEFT).use { BitmapFactory.decodeStream(it) }
+        val expectedBitmap = assets(ARROW_RIGHT).use { BitmapFactory.decodeStream(it) }
+
+        val result = bitmap.rotate(180f)
+
+        assertTrue(result.sameAs(expectedBitmap))
+    }
+
     private fun runTest(
         testFile: String,
         expectedFile: String,
@@ -109,5 +119,7 @@ class BitmapUtilitiesTest {
         internal const val SQUARE = "sample/square_test.png"
         internal const val WIDTH = "sample/width_test.png"
         internal const val HEIGHT = "sample/height_test.png"
+        internal const val ARROW_LEFT = "sample/arrow_left.png"
+        internal const val ARROW_RIGHT = "expected/arrow_right.png"
     }
 }
