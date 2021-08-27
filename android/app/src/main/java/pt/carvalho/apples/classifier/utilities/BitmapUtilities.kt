@@ -13,14 +13,26 @@ internal fun Bitmap.centerSquareCrop(size: Int): Bitmap {
     }
 
     val expectedSize = if (smallestSide < size) smallestSide else size
-    val x = (width - expectedSize) / 2
-    val y = (height - expectedSize) / 2
 
-    val resizedBitmap = Bitmap.createBitmap(this, x, y, expectedSize, expectedSize)
+    val croppedBitmap = crop(
+        bitmap = this,
+        x = (width - expectedSize) / 2,
+        y = (height - expectedSize) / 2,
+        size = expectedSize
+    )
 
     return if (smallestSide < size) {
-        Bitmap.createScaledBitmap(resizedBitmap, size, size, false)
+        resize(croppedBitmap, size)
     } else {
-        resizedBitmap
+        croppedBitmap
     }
 }
+
+private fun crop(
+    bitmap: Bitmap,
+    x: Int,
+    y: Int,
+    size: Int
+): Bitmap = Bitmap.createBitmap(bitmap, x, y, size, size)
+
+private fun resize(bitmap: Bitmap, size: Int): Bitmap = Bitmap.createScaledBitmap(bitmap, size, size, false)
