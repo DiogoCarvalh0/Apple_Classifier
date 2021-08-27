@@ -8,57 +8,79 @@ import java.lang.IllegalArgumentException
 class BitmapUtilitiesTest {
 
     @Test(expected = IllegalArgumentException::class)
-    fun when_centerSquareCrop_is_called_with_a_bigger_size_than_the_bitmap_an_exception_is_thrown() {
-        val bitmap = assets(SQUARE).use { BitmapFactory.decodeStream(it) }
-
-        bitmap.centerSquareCrop(1024)
+    fun when_centerSquareCrop_is_called_with_a_negative_number_size_an_exception_is_thrown() {
+        assets(SQUARE).use { BitmapFactory.decodeStream(it) }
+            .centerSquareCrop(-1)
     }
 
-    @Test(expected = IllegalArgumentException::class)
-    fun when_centerSquareCrop_is_called_with_a_negative_number_size_an_exception_is_thrown() {
-        val bitmap = assets(SQUARE).use { BitmapFactory.decodeStream(it) }
+    @Test
+    fun when_centerSquareCrop_is_called_with_a_bigger_size_than_the_bitmap_we_resize_it_instead() {
+        val expectedSize = 1024
 
-        bitmap.centerSquareCrop(-1)
+        runTest(
+            testFile = SQUARE,
+            expectedFile = "expected/square_resize_$expectedSize.png",
+            size = expectedSize
+        )
     }
 
     @Test
     fun when_centerSquareCrop_is_called_on_a_square_image_with_500_size_we_crop_it_from_the_center() {
-        val bitmap = assets(SQUARE).use { BitmapFactory.decodeStream(it) }
-        val expectedBitmap = assets("expected/square_crop_500.png").use { BitmapFactory.decodeStream(it) }
+        val expectedSize = 500
 
-        val result = bitmap.centerSquareCrop(500)
-
-        assertTrue(result.sameAs(expectedBitmap))
+        runTest(
+            testFile = SQUARE,
+            expectedFile = "expected/square_crop_$expectedSize.png",
+            size = expectedSize
+        )
     }
 
     @Test
     fun when_centerSquareCrop_is_called_on_a_square_image_with_800_size_we_crop_it_from_the_center() {
-        val bitmap = assets(SQUARE).use { BitmapFactory.decodeStream(it) }
-        val expectedBitmap = assets("expected/square_crop_800.png").use { BitmapFactory.decodeStream(it) }
+        val expectedSize = 800
 
-        val result = bitmap.centerSquareCrop(800)
-
-        assertTrue(result.sameAs(expectedBitmap))
+        runTest(
+            testFile = SQUARE,
+            expectedFile = "expected/square_crop_$expectedSize.png",
+            size = expectedSize
+        )
     }
 
     @Test
     fun when_centerSquareCrop_is_called_on_a_image_bigger_width_we_crop_it_from_the_center() {
-        val bitmap = assets(WIDTH).use { BitmapFactory.decodeStream(it) }
-        val expectedBitmap = assets(SQUARE).use { BitmapFactory.decodeStream(it) }
+        val expectedSize = 1000
 
-        val result = bitmap.centerSquareCrop(1000)
-
-        assertTrue(result.sameAs(expectedBitmap))
+        runTest(
+            testFile = WIDTH,
+            expectedFile = SQUARE,
+            size = expectedSize
+        )
     }
 
     @Test
     fun when_centerSquareCrop_is_called_on_a_image_bigger_height_we_crop_it_from_the_center() {
-        val bitmap = assets(HEIGHT).use { BitmapFactory.decodeStream(it) }
-        val expectedBitmap = assets(SQUARE).use { BitmapFactory.decodeStream(it) }
+        val expectedSize = 1000
 
-        val result = bitmap.centerSquareCrop(1000)
+        runTest(
+            testFile = HEIGHT,
+            expectedFile = SQUARE,
+            size = expectedSize
+        )
+    }
+
+    private fun runTest(
+        testFile: String,
+        expectedFile: String,
+        size: Int
+    ) {
+        val bitmap = assets(testFile).use { BitmapFactory.decodeStream(it) }
+        val expectedBitmap = assets(expectedFile).use { BitmapFactory.decodeStream(it) }
+
+        val result = bitmap.centerSquareCrop(size)
 
         assertTrue(result.sameAs(expectedBitmap))
+        assertTrue(result.width == size)
+        assertTrue(result.height == size)
     }
 
     companion object {
