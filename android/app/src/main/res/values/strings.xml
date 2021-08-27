@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Apples Classifier</string>
+    <string name="camera_icon">📸</string>
+    <string name="denied_icon">😭</string>
+    <string name="camera_permission_explanation">To be able to detect what kind of apple you are seeing we need access to your camera. Would you like to grant the necessary permission?</string>
+    <string name="grant_permission">Grant Camera Permission</string>
+    <string name="camera_permission_denied">Without the camera permission you cannot use this app. Please grant it in settings.</string>
+    <string name="open_settings">Open Settings</string>
 </resources>

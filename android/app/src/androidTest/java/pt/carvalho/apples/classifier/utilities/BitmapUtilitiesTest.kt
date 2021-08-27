@@ -3,9 +3,10 @@ package pt.carvalho.apples.classifier.utilities
 import android.graphics.BitmapFactory
 import junit.framework.Assert.assertTrue
 import org.junit.Test
+import pt.carvalho.apples.classifier.assets
 import java.lang.IllegalArgumentException
 
-class BitmapUtilitiesTest {
+internal class BitmapUtilitiesTest {
 
     @Test(expected = IllegalArgumentException::class)
     fun when_centerSquareCrop_is_called_with_a_negative_number_size_an_exception_is_thrown() {
