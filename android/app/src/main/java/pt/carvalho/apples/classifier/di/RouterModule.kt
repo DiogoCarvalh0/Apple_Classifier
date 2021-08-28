@@ -16,7 +16,5 @@ internal object RouterModule {
     fun provideRouter(
         @ApplicationContext context: Context,
         @PackageName packageName: String
-    ): Router {
-        return RouterImpl(context, packageName)
-    }
+    ): Router = RouterImpl(context, packageName)
 }

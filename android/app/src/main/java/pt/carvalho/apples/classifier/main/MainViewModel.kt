@@ -16,7 +16,7 @@ internal class MainViewModel @Inject constructor(
     private val tensorflow: Tensorflow,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher
 ) : ViewModel() {
-    internal fun process(image: Bitmap) {
+    fun process(image: Bitmap) {
         viewModelScope.launch {
             withContext(ioDispatcher) {
                 tensorflow.classify(image)
