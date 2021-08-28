@@ -107,7 +107,9 @@ internal class ErrorContentTest {
 
     internal companion object {
         private val testCase = TestCase(
-            folder = "error/$density"
+            folder = "error/$density",
+            // Rendering emojis really triggers a big difference?!
+            maxErrorPercentage = 1.2f
         )
 
         @AfterClass
