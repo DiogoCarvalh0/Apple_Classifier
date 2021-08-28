@@ -13,9 +13,9 @@ import javax.inject.Qualifier
 internal object PackageManagerModule {
     @Provides
     @PackageName
-    fun providePackageName(@ApplicationContext context: Context): String {
-        return context.packageName
-    }
+    fun providePackageName(
+        @ApplicationContext context: Context
+    ): String = context.packageName
 }
 
 @Qualifier

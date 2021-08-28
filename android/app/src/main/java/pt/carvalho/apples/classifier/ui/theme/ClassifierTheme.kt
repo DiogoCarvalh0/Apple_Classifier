@@ -18,7 +18,7 @@ private fun color(id: Int): Color {
 }
 
 @Composable
-fun ClassifierTheme(
+internal fun ClassifierTheme(
     content: @Composable () -> Unit
 ) {
     val colors = MaterialTheme.colors.copy(
