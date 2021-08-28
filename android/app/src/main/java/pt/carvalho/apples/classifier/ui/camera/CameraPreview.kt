@@ -1,4 +1,4 @@
-package pt.carvalho.apples.classifier.ui
+package pt.carvalho.apples.classifier.ui.camera
 
 import android.content.Context
 import androidx.camera.core.CameraSelector

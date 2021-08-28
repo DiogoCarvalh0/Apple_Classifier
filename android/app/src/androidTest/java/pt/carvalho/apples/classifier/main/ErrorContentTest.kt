@@ -17,8 +17,8 @@ import pt.carvalho.apples.classifier.ScreenshotComparator
 import pt.carvalho.apples.classifier.TestCase
 import pt.carvalho.apples.classifier.density
 import pt.carvalho.apples.classifier.string
-import pt.carvalho.apples.classifier.ui.AskPermissionContent
-import pt.carvalho.apples.classifier.ui.DeniedPermissionContent
+import pt.carvalho.apples.classifier.ui.error.AskPermissionContent
+import pt.carvalho.apples.classifier.ui.error.DeniedPermissionContent
 import pt.carvalho.apples.classifier.ui.theme.ClassifierTheme
 
 internal class ErrorContentTest {

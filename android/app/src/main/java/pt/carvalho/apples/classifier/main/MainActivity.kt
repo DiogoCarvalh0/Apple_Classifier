@@ -6,14 +6,17 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import dagger.hilt.android.AndroidEntryPoint
 import pt.carvalho.apples.classifier.navigation.Router
 import pt.carvalho.apples.classifier.permission.PermissionManager
 import pt.carvalho.apples.classifier.processing.converter.FrameConverter
-import pt.carvalho.apples.classifier.ui.AskPermissionContent
-import pt.carvalho.apples.classifier.ui.CameraPreview
-import pt.carvalho.apples.classifier.ui.DeniedPermissionContent
+import pt.carvalho.apples.classifier.ui.camera.CameraPreview
+import pt.carvalho.apples.classifier.ui.details.DetailsScreen
+import pt.carvalho.apples.classifier.ui.error.AskPermissionContent
+import pt.carvalho.apples.classifier.ui.error.DeniedPermissionContent
+import pt.carvalho.apples.classifier.ui.modal.Bottomsheet
 import pt.carvalho.apples.classifier.ui.theme.ClassifierTheme
 import pt.carvalho.apples.classifier.utilities.fullscreen
 import javax.inject.Inject
@@ -31,16 +34,32 @@ class MainActivity : ComponentActivity() {
             ClassifierTheme {
                 PermissionManager(
                     permission = Manifest.permission.CAMERA,
-                    content = {
-                        CameraPreview(
-                            modifier = Modifier.fillMaxSize(),
-                            analyzer = FrameConverter(viewModel::process)
-                        )
-                    },
+                    content = { MainContent(viewModel) },
                     askPermissionContent = { askPermission -> AskPermissionContent(askPermission) },
                     deniedPermissionContent = { DeniedPermissionContent { router.navigateToSystemPreferences() } }
                 )
             }
         }
+    }
+
+    @Composable
+    private fun MainContent(
+        viewModel: MainViewModel
+    ) {
+        val apple = viewModel.result.value
+
+        Bottomsheet(
+            isExpanded = apple != null,
+            sheetContent = {
+                apple?.let { DetailsScreen(apple = it) }
+            },
+            behindSheetContent = {
+                CameraPreview(
+                    modifier = Modifier.fillMaxSize(),
+                    analyzer = FrameConverter(viewModel::process)
+                )
+            },
+            whenCollapsed = viewModel::onDismissed
+        )
     }
 }
