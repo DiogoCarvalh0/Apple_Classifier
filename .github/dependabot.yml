@@ -9,3 +9,6 @@ updates:
     directory: "/android/"
     schedule:
       interval: "daily"
+    reviewers:
+      - "Andr3Carvalh0"
+      - "DiogoCarvalh0"
