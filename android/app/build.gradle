@@ -9,12 +9,12 @@ String KEY = System.getenv('APPLE_CLASSIFIER_KEY')
 String PASSWORD = System.getenv('APPLE_CLASSIFIER_PASSWORD')
 
 android {
-    compileSdk 30
+    compileSdk 31
 
     defaultConfig {
         applicationId "pt.carvalho.apples.classifier"
         minSdk 21
-        targetSdk 30
+        targetSdk 31
         versionCode rootProject.ext.code()
         versionName rootProject.ext.name()
 

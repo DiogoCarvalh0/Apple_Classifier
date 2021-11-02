@@ -109,7 +109,7 @@ internal class ErrorContentTest {
         private val testCase = TestCase(
             folder = "error/$density",
             // Rendering emojis really triggers a big difference?!
-            maxErrorPercentage = 1.2f
+            maxErrorPercentage = 1.5f
         )
 
         @AfterClass
