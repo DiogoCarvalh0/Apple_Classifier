@@ -2,6 +2,7 @@ package pt.carvalho.apples.classifier.main
 
 import android.Manifest
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
@@ -46,12 +47,18 @@ class MainActivity : ComponentActivity() {
     private fun MainContent(
         viewModel: MainViewModel
     ) {
-        val apple = viewModel.result.value
+        val displayState = viewModel.result.value
+
+        if (displayState is MainViewModel.DisplayData.Error) {
+            Toast.makeText(this, "No object found!", Toast.LENGTH_SHORT).show()
+        }
 
         Bottomsheet(
-            isExpanded = apple != null,
+            isExpanded = displayState is MainViewModel.DisplayData.DetectedObject,
             sheetContent = {
-                apple?.let { DetailsScreen(apple = it) }
+                if (displayState is MainViewModel.DisplayData.DetectedObject) {
+                    DetailsScreen(apple = displayState.value)
+                }
             },
             behindSheetContent = {
                 CameraPreview(

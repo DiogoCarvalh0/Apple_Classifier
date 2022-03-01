@@ -10,19 +10,23 @@ import org.tensorflow.lite.task.vision.detector.ObjectDetector
 import pt.carvalho.apples.classifier.processing.tensorflow.Tensorflow
 import pt.carvalho.apples.classifier.processing.tensorflow.TensorflowImpl
 
+private const val MAX_RESULTS = 1
+private const val SCORE_THRESHOLD = 0.15f
+private const val MODEL_PATH = "apple_model.tflite"
+
 @Module
 @InstallIn(ViewModelComponent::class)
 internal object TensorflowModule {
     @Provides
     fun provideObjectDetector(@ApplicationContext context: Context): ObjectDetector {
         val options = ObjectDetector.ObjectDetectorOptions.builder()
-            .setMaxResults(1)
-            .setScoreThreshold(0.5f)
+            .setMaxResults(MAX_RESULTS)
+            .setScoreThreshold(SCORE_THRESHOLD)
             .build()
 
         return ObjectDetector.createFromFileAndOptions(
             context,
-            "apple_model.tflite",
+            MODEL_PATH,
             options
         )
     }
