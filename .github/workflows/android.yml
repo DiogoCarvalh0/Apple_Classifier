@@ -63,7 +63,7 @@ jobs:
     strategy:
       matrix:
         sdk: [ 29 ]
-        profile: [ pixel_2 ]
+        profile: [ pixel_xl, pixel_2 ]
     steps:
       - uses: actions/checkout@v2
 
