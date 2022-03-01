@@ -56,7 +56,10 @@ internal class ErrorContentTest {
         isAskPermissions.value = true
 
         ScreenshotComparator.assertScreenshotMatches(
-            testCase = testCase.copy(filename = "ask_permission"),
+            testCase = testCase.copy(
+                filename = "ask_permission",
+                maxErrorPercentage = 2.5f // 2.5%. This is due to the huge text
+            ),
             node = composeTestRule.onRoot()
         )
     }

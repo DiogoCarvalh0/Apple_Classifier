@@ -16,8 +16,7 @@ ext {
             kotlin              : '1.6.10',
             material            : '1.5.0',
             mockito             : '4.0.0',
-            tensorflow          : '2.8.0',
-            tensorflowSupport   : '0.3.1'
+            tensorflowVision    : '0.3.1'
     ]
 
     dependencies = [
@@ -43,8 +42,6 @@ ext {
             junit               : "junit:junit:${versions.junit}",
             material            : "com.google.android.material:material:${versions.material}",
             mockito             : "org.mockito.kotlin:mockito-kotlin:${versions.mockito}",
-            tensorflow          : "org.tensorflow:tensorflow-lite:${versions.tensorflow}",
-            tensorflowGPU       : "org.tensorflow:tensorflow-lite-gpu:${versions.tensorflow}",
-            tensorflowSupport   : "org.tensorflow:tensorflow-lite-support:${versions.tensorflowSupport}"
+            tensorflowVision    : "org.tensorflow:tensorflow-lite-task-vision:${versions.tensorflowVision}"
     ]
 }
