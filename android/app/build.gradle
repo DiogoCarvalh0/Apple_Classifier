@@ -97,9 +97,10 @@ dependencies {
     implementation rootProject.ext.dependencies.hilt
     implementation rootProject.ext.dependencies.coroutines
     implementation rootProject.ext.dependencies.material
-    implementation rootProject.ext.dependencies.tensorflow
+    /*implementation rootProject.ext.dependencies.tensorflow
     implementation rootProject.ext.dependencies.tensorflowGPU
-    implementation rootProject.ext.dependencies.tensorflowSupport
+    implementation rootProject.ext.dependencies.tensorflowSupport*/
+    implementation rootProject.ext.dependencies.tensorflowVision
 
     kapt rootProject.ext.dependencies.hiltCompiler
 

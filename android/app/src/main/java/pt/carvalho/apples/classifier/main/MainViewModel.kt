@@ -4,6 +4,7 @@ import android.graphics.Bitmap
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -29,7 +30,8 @@ internal class MainViewModel @Inject constructor(
     fun process(image: Bitmap) {
         viewModelScope.launch {
             withContext(ioDispatcher) {
-                tensorflow.classify(image)
+                val result = tensorflow.classify(image)
+                Log.v("diogo", result)
             }
         }
     }
