@@ -1,4 +1,4 @@
-package pt.carvalho.apples.classifier.ui
+package pt.carvalho.apples.classifier.ui.error
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

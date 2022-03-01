@@ -88,6 +88,7 @@ dependencies {
     implementation rootProject.ext.dependencies.cameraX
     implementation rootProject.ext.dependencies.cameraXLifecycle
     implementation rootProject.ext.dependencies.cameraXView
+    implementation rootProject.ext.dependencies.coil
     implementation rootProject.ext.dependencies.composeAnimation
     implementation rootProject.ext.dependencies.composeMaterial
     implementation rootProject.ext.dependencies.composePermissions

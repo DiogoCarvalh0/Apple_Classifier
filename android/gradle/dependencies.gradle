@@ -5,18 +5,19 @@ ext {
             appcompat           : '1.3.1',
             cameraX             : '1.0.2',
             cameraXView         : '1.0.0-alpha30',
-            compose             : '1.0.4',
+            coil                : '1.3.2',
+            compose             : '1.1.1',
             coreKtx             : '1.7.0',
-            coroutines          : '1.5.2',
-            detekt              : '1.18.0',
-            gradleTools         : '7.0.1',
-            hilt                : '2.40',
+            coroutines          : '1.6.0',
+            detekt              : '1.19.0',
+            gradleTools         : '7.1.2',
+            hilt                : '2.41',
             junit               : '4.13.2',
-            kotlin              : '1.5.21',
-            material            : '1.4.0',
+            kotlin              : '1.6.10',
+            material            : '1.5.0',
             mockito             : '4.0.0',
-            tensorflow          : '2.6.0',
-            tensorflowSupport   : '0.2.0'
+            tensorflow          : '2.8.0',
+            tensorflowSupport   : '0.3.1'
     ]
 
     dependencies = [
@@ -26,6 +27,7 @@ ext {
             cameraX             : "androidx.camera:camera-camera2:${versions.cameraX}",
             cameraXLifecycle    : "androidx.camera:camera-lifecycle:${versions.cameraX}",
             cameraXView         : "androidx.camera:camera-view:${versions.cameraXView}",
+            coil                : "io.coil-kt:coil-compose:${versions.coil}",
             composeAnimation    : "androidx.compose.animation:animation:${versions.compose}",
             composeJunit        : "androidx.compose.ui:ui-test-junit4:${versions.compose}",
             composeMaterial     : "androidx.compose.material:material:${versions.compose}",
