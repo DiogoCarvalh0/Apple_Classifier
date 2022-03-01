@@ -62,12 +62,12 @@ internal class MainViewModel @Inject constructor(
     internal sealed class DisplayData {
         data class DetectedObject(
             val value: Apple
-        ): DisplayData()
+        ) : DisplayData()
 
         data class Error(
             val id: String = "${Random.nextInt()}"
-        ): DisplayData()
+        ) : DisplayData()
 
-        object Nothing: DisplayData()
+        object Nothing : DisplayData()
     }
 }
