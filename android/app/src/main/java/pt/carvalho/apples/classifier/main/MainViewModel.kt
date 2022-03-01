@@ -27,10 +27,12 @@ internal class MainViewModel @Inject constructor(
     private val _result: MutableState<DisplayData> = mutableStateOf(DisplayData.Nothing)
     val result: State<DisplayData> = _result
 
-    private var isLocked: Boolean = false
     private var lastEmit: Long = -1L
 
     fun process(image: Bitmap) {
+        // When we are showing a result dont process anything
+        if (result.value is DisplayData.DetectedObject) return
+
         val currentTime = System.currentTimeMillis()
         if ((currentTime - THRESHOLD_MILLI <= lastEmit) && lastEmit != -1L) return
 
@@ -39,10 +41,10 @@ internal class MainViewModel @Inject constructor(
         viewModelScope.launch(ioDispatcher) {
             val processedResult = runCatching { tensorflow.classify(image) }.getOrNull()
 
-            if (processedResult == null) {
-                _result.value = DisplayData.Error()
+            _result.value = if (processedResult == null) {
+                 DisplayData.Error()
             } else {
-                emitValue(
+                DisplayData.DetectedObject(
                     Apple(
                         name = processedResult,
                         description = " ¯\\_(ツ)_/¯",
@@ -54,14 +56,7 @@ internal class MainViewModel @Inject constructor(
     }
 
     fun onDismissed() {
-        isLocked = false
-    }
-
-    private fun emitValue(value: Apple) {
-        if (!isLocked) {
-            _result.value = DisplayData.DetectedObject(value)
-            isLocked = true
-        }
+        _result.value = DisplayData.Nothing
     }
 
     internal sealed class DisplayData {

@@ -50,7 +50,7 @@ class MainActivity : ComponentActivity() {
         val displayState = viewModel.result.value
 
         if (displayState is MainViewModel.DisplayData.Error) {
-            Toast.makeText(this, "No object found!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "No apples found!", Toast.LENGTH_SHORT).show()
         }
 
         Bottomsheet(
