@@ -4,17 +4,22 @@ all of the same class
 
 
 arguments:
-    XML_DIR: Path to the xml files
+    PATH: Path to the images & xml files
+    IMAGE_FORMAT: Image format (jpg, png, ...)
+    OUTPUT_PATH: Path to were the folders should be created
 """
 
 import os
+from shutil import copyfile
 import glob
 import re
+from tqdm import tqdm
 import xml.etree.ElementTree as ET
 
 
-XML_DIR = './../../data/train/'
+PATH = './../../data/imgs/'
 IMAGE_FORMAT = 'jpg'
+OUTPUT_PATH = './../../data/'
 
 
 def add_object_to_count(count, object_name):
@@ -26,45 +31,44 @@ def add_object_to_count(count, object_name):
     return count
 
 
+def find_objects_in_xml(tree_root):
+    objects_in_xml = {}
+    
+    for member in tree_root.findall('object'):
+        object_name = member.find('name').text
+        objects_in_xml = add_object_to_count(objects_in_xml, object_name)
+        
+    return objects_in_xml
+    
+
+def move_files(save_folder, image_file, xml_file):
+    image_name = re.split(r'/|\\', image_file)[-1]
+    xml_name = re.split(r'/|\\', xml_file)[-1]
+    
+    copyfile(image_file, f'{save_folder}/{image_name}')
+    copyfile(xml_file, f'{save_folder}/{xml_name}')
+
+
 def main():
-    count = {}
-
-    for xml_file in glob.glob(f'{XML_DIR}*.xml'):
-        xml_name = re.split(r'/|\\', xml_file)[-1].split('.')[:-1]
-
+    for xml_file, image_file in tqdm(zip(glob.glob(f'{PATH}*.xml'), glob.glob(f'{PATH}*.{IMAGE_FORMAT}')), total=len(os.listdir(PATH))//2):
         tree = ET.parse(xml_file)
         root = tree.getroot()
 
-        objects_in_img = {}
-
-        for member in root.findall('object'):
-            bndbox = member.find('bndbox')
-            object_name = member.find('name').text
-
-            count = add_object_to_count(count, object_name)
-            objects_in_img = add_object_to_count(objects_in_img, object_name)
-
+        objects_in_img = find_objects_in_xml(root)
 
         if len(objects_in_img) >= 2:
-            if not os.path.exists('./multiclass/'):
-                os.mkdir('./multiclass/')
-
-            os.rename(f'{xml_file[:-4]}.{IMAGE_FORMAT}', './multiclass/{xml_name}.{extension}'
-                .format(xml_name='.'.join(xml_name), extension=IMAGE_FORMAT))
-            os.rename(xml_file, './multiclass/{xml_name}.xml'.format(xml_name='.'.join(xml_name)))
+            if not os.path.exists(f'{OUTPUT_PATH}multiclass/'):
+                os.mkdir(f'{OUTPUT_PATH}multiclass/')
+                
+            move_files(f'{OUTPUT_PATH}multiclass/', image_file, xml_file)
             
         else:
             object_name = list(objects_in_img.keys())[0]
 
-            if not os.path.exists(f'./{object_name}/'):
-                os.mkdir(f'./{object_name}/')
-
-
-            os.rename(f'{xml_file[:-4]}.{IMAGE_FORMAT}', './{apple}/{xml_name}.{extension}'
-                .format(apple=object_name, xml_name='.'.join(xml_name), extension=IMAGE_FORMAT))
-            os.rename(xml_file, './{apple}/{xml_name}.xml'.format(apple=object_name, 
-                                                                  xml_name='.'.join(xml_name)))
-            
+            if not os.path.exists(f'{OUTPUT_PATH}{object_name}/'):
+                os.mkdir(f'{OUTPUT_PATH}{object_name}/')
+                
+            move_files(f'{OUTPUT_PATH}{object_name}/', image_file, xml_file)        
 
 
 if __name__ == '__main__':

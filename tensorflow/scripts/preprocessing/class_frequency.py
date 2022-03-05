@@ -12,7 +12,7 @@ from tqdm import tqdm
 from pprint import pprint
 
 
-XML_DIR = './../../data/imgs-full/'
+XML_DIR = './../../data/imgs/'
 
 def add_object_to_count(count, object_name):
     try:

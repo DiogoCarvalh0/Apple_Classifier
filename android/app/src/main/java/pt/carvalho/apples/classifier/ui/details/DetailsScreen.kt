@@ -27,7 +27,7 @@ import pt.carvalho.apples.classifier.ui.theme.ClassifierTheme
 internal fun DetailsScreen(apple: Apple) {
     Column {
         Header(
-            title = apple.name,
+            title = "${apple.name} (${apple.confidence}%)",
             description = apple.description,
             picture = apple.picture
         )

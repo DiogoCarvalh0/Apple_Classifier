@@ -43,7 +43,7 @@ def iterate_dir(source=os.getcwd(), dest=None, ratio=0.1, copy_xml=True):
     num_images = len(images)
     num_test_images = math.ceil(ratio*num_images)
 
-    for i in range(num_test_images):
+    for _ in range(num_test_images):
         idx = random.randint(0, len(images)-1)
         filename = images[idx]
         copyfile(os.path.join(source, filename),

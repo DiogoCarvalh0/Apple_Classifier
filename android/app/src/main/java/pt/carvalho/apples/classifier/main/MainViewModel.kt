@@ -14,9 +14,11 @@ import pt.carvalho.apples.classifier.model.Apple
 import pt.carvalho.apples.classifier.model.SAMPLE
 import pt.carvalho.apples.classifier.processing.tensorflow.Tensorflow
 import javax.inject.Inject
+import kotlin.math.roundToInt
 import kotlin.random.Random
 
 private const val THRESHOLD_MILLI = 5000
+private const val MAX_PERCENTAGE = 100
 
 @HiltViewModel
 internal class MainViewModel @Inject constructor(
@@ -46,7 +48,8 @@ internal class MainViewModel @Inject constructor(
             } else {
                 DisplayData.DetectedObject(
                     Apple(
-                        name = processedResult,
+                        name = processedResult.name,
+                        confidence = (processedResult.confidence * MAX_PERCENTAGE).roundToInt(),
                         description = " ¯\\_(ツ)_/¯",
                         picture = SAMPLE.picture
                     )
