@@ -90,6 +90,7 @@ dependencies {
     implementation rootProject.ext.dependencies.cameraXView
     implementation rootProject.ext.dependencies.coil
     implementation rootProject.ext.dependencies.composeAnimation
+    implementation rootProject.ext.dependencies.composeInsets
     implementation rootProject.ext.dependencies.composeMaterial
     implementation rootProject.ext.dependencies.composePermissions
     implementation rootProject.ext.dependencies.composeUITooling
