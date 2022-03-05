@@ -7,6 +7,7 @@ import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.core.content.ContextCompat
+import com.google.accompanist.insets.ProvideWindowInsets
 import pt.carvalho.apples.classifier.R
 
 @Composable
@@ -28,8 +29,10 @@ internal fun ClassifierTheme(
     )
 
     MaterialTheme(colors = colors) {
-        Surface {
-            content()
+        ProvideWindowInsets {
+            Surface {
+                content()
+            }
         }
     }
 }

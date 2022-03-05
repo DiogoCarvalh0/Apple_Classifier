@@ -24,8 +24,13 @@ import pt.carvalho.apples.classifier.model.SAMPLE
 import pt.carvalho.apples.classifier.ui.theme.ClassifierTheme
 
 @Composable
-internal fun DetailsScreen(apple: Apple) {
-    Column {
+internal fun DetailsScreen(
+    modifier: Modifier = Modifier,
+    apple: Apple
+) {
+    Column(
+        modifier = modifier
+    ) {
         Header(
             title = apple.name,
             description = apple.description,
