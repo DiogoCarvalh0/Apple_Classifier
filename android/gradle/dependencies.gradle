@@ -28,6 +28,7 @@ ext {
             cameraXView         : "androidx.camera:camera-view:${versions.cameraXView}",
             coil                : "io.coil-kt:coil-compose:${versions.coil}",
             composeAnimation    : "androidx.compose.animation:animation:${versions.compose}",
+            composeInsets       : "com.google.accompanist:accompanist-insets:${versions.accompanist}",
             composeJunit        : "androidx.compose.ui:ui-test-junit4:${versions.compose}",
             composeMaterial     : "androidx.compose.material:material:${versions.compose}",
             composePermissions  : "com.google.accompanist:accompanist-permissions:${versions.accompanist}",
