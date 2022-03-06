@@ -7,6 +7,9 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
 import org.tensorflow.lite.task.vision.detector.ObjectDetector
+import pt.carvalho.apples.classifier.data.Database
+import pt.carvalho.apples.classifier.processing.ObjectDetector as LocalObjectDetector
+import pt.carvalho.apples.classifier.processing.ObjectDetectorImpl
 import pt.carvalho.apples.classifier.processing.tensorflow.Tensorflow
 import pt.carvalho.apples.classifier.processing.tensorflow.TensorflowImpl
 
@@ -33,4 +36,17 @@ internal object TensorflowModule {
 
     @Provides
     fun provideTensorflow(detector: ObjectDetector): Tensorflow = TensorflowImpl(detector)
+}
+
+@Module
+@InstallIn(ViewModelComponent::class)
+internal object ProcessingModule {
+    @Provides
+    fun provideDetector(
+        tensorflow: Tensorflow,
+        database: Database
+    ): LocalObjectDetector = ObjectDetectorImpl(
+        tensorflow = tensorflow,
+        database = database
+    )
 }

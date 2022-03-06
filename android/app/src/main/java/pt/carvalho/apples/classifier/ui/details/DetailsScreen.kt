@@ -1,14 +1,12 @@
 package pt.carvalho.apples.classifier.ui.details
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.material.Divider
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -38,17 +36,6 @@ internal fun DetailsScreen(
         )
 
         Divider(modifier = Modifier.padding(bottom = 16.dp))
-
-        LazyRow {
-            items(apple.related.size) { index ->
-                val item = apple.related[index]
-
-                AppleCard(
-                    title = item.name,
-                    picture = item.picture
-                )
-            }
-        }
     }
 }
 
@@ -90,26 +77,6 @@ private fun Header(
                 text = description
             )
         }
-    }
-}
-
-@Composable
-@OptIn(ExperimentalCoilApi::class)
-private fun AppleCard(
-    title: String,
-    picture: String
-) {
-    Box(modifier = Modifier.padding(16.dp)) {
-        Image(
-            painter = rememberImagePainter(
-                data = picture,
-                builder = {
-                    crossfade(true)
-                }
-            ),
-            contentDescription = "",
-            modifier = Modifier.size(96.dp)
-        )
     }
 }
 

@@ -10,19 +10,18 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 import pt.carvalho.apples.classifier.di.IoDispatcher
+import pt.carvalho.apples.classifier.di.MainTimeout
 import pt.carvalho.apples.classifier.model.Apple
-import pt.carvalho.apples.classifier.model.SAMPLE
-import pt.carvalho.apples.classifier.processing.tensorflow.Tensorflow
+import pt.carvalho.apples.classifier.processing.ObjectDetector
+import pt.carvalho.apples.classifier.utilities.TimeManager
 import javax.inject.Inject
-import kotlin.math.roundToInt
 import kotlin.random.Random
-
-private const val THRESHOLD_MILLI = 5000
-private const val MAX_PERCENTAGE = 100
 
 @HiltViewModel
 internal class MainViewModel @Inject constructor(
-    private val tensorflow: Tensorflow,
+    private val detector: ObjectDetector,
+    private val timeManager: TimeManager,
+    @MainTimeout private val timeout: Long,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher
 ) : ViewModel() {
 
@@ -35,25 +34,16 @@ internal class MainViewModel @Inject constructor(
         // When we are showing a result dont process anything
         if (result.value is DisplayData.DetectedObject) return
 
-        val currentTime = System.currentTimeMillis()
-        if ((currentTime - THRESHOLD_MILLI <= lastEmit) && lastEmit != -1L) return
-
-        lastEmit = currentTime
+        if (!timeManager.hasTimePassedSince(lastEmit, timeout) && lastEmit != -1L) return
+        lastEmit = timeManager.now()
 
         viewModelScope.launch(ioDispatcher) {
-            val processedResult = runCatching { tensorflow.classify(image) }.getOrNull()
+            val result = runCatching { detector.detect(image) }.getOrNull()
 
-            _result.value = if (processedResult == null) {
+            _result.value = if (result == null) {
                  DisplayData.Error()
             } else {
-                DisplayData.DetectedObject(
-                    Apple(
-                        name = processedResult.name,
-                        confidence = (processedResult.confidence * MAX_PERCENTAGE).roundToInt(),
-                        description = " ¯\\_(ツ)_/¯",
-                        picture = SAMPLE.picture
-                    )
-                )
+                DisplayData.DetectedObject(result)
             }
         }
     }

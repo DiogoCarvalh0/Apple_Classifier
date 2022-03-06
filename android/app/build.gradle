@@ -7,6 +7,7 @@ plugins {
 
 String KEY = System.getenv('APPLE_CLASSIFIER_KEY')
 String PASSWORD = System.getenv('APPLE_CLASSIFIER_PASSWORD')
+String MAPS_KEY = System.getenv('APPLE_CLASSIFIER_MAPS_KEY')
 
 android {
     compileSdk 31
@@ -23,6 +24,10 @@ android {
         vectorDrawables {
             useSupportLibrary true
         }
+
+        manifestPlaceholders = [
+            mapsKey: "${MAPS_KEY}"
+        ]
     }
 
     buildFeatures {
@@ -91,17 +96,22 @@ dependencies {
     implementation rootProject.ext.dependencies.coil
     implementation rootProject.ext.dependencies.composeAnimation
     implementation rootProject.ext.dependencies.composeInsets
+    implementation rootProject.ext.dependencies.composeMaps
     implementation rootProject.ext.dependencies.composeMaterial
     implementation rootProject.ext.dependencies.composePermissions
     implementation rootProject.ext.dependencies.composeUITooling
     implementation rootProject.ext.dependencies.coreKtx
     implementation rootProject.ext.dependencies.hilt
     implementation rootProject.ext.dependencies.coroutines
+    implementation rootProject.ext.dependencies.mapsPlayServices
     implementation rootProject.ext.dependencies.material
+    implementation rootProject.ext.dependencies.moshi
     implementation rootProject.ext.dependencies.tensorflowVision
 
     kapt rootProject.ext.dependencies.hiltCompiler
+    kapt rootProject.ext.dependencies.moshiCodegen
 
+    testImplementation rootProject.ext.dependencies.coroutinesTest
     testImplementation rootProject.ext.dependencies.junit
     testImplementation rootProject.ext.dependencies.mockito
 
