@@ -44,7 +44,7 @@ internal class DatabaseTest {
         const val EXISTING_LABEL = "Fuji"
         const val ERROR_LABEL = "Error"
 
-        val DATA_JSON = "[" +
+        const val DATA_JSON = "[" +
             "{" +
             "   \"id\":\"Fuji\"," +
             "   \"name\":\"Fuji\"," +

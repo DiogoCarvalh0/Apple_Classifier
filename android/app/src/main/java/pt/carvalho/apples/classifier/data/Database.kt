@@ -42,7 +42,7 @@ private const val DATABASE_FILE = "database.json"
 internal class DatabaseImpl(
     private val adapter: JsonAdapter<List<Apple>>,
     private val assetsReader: AssetsReader
-): Database {
+) : Database {
     private var data: List<Apple> = emptyList()
 
     override suspend fun findLabel(label: String): Apple? {

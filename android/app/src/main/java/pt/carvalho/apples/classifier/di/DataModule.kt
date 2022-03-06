@@ -14,7 +14,7 @@ import pt.carvalho.apples.classifier.utilities.AssetsReader
 
 @Module
 @InstallIn(ViewModelComponent::class)
-internal object DatabaseModule {
+internal object DataModule {
 
     @Provides
     fun provideDatabase(moshi: Moshi, assetsReader: AssetsReader): Database {
