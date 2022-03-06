@@ -14,8 +14,11 @@ ext {
             hilt                : '2.41',
             junit               : '4.13.2',
             kotlin              : '1.6.10',
+            maps                : '1.2.0',
             material            : '1.5.0',
             mockito             : '4.0.0',
+            moshi               : '1.13.0',
+            playServices        : '18.0.2',
             tensorflowVision    : '0.3.1'
     ]
 
@@ -30,6 +33,7 @@ ext {
             composeAnimation    : "androidx.compose.animation:animation:${versions.compose}",
             composeInsets       : "com.google.accompanist:accompanist-insets:${versions.accompanist}",
             composeJunit        : "androidx.compose.ui:ui-test-junit4:${versions.compose}",
+            composeMaps         : "com.google.maps.android:maps-compose:${versions.maps}",
             composeMaterial     : "androidx.compose.material:material:${versions.compose}",
             composePermissions  : "com.google.accompanist:accompanist-permissions:${versions.accompanist}",
             composeTestManifest : "androidx.compose.ui:ui-test-manifest:${versions.compose}",
@@ -37,12 +41,16 @@ ext {
             composeUITooling    : "androidx.compose.ui:ui-tooling:${versions.compose}",
             coreKtx             : "androidx.core:core-ktx:${versions.coreKtx}",
             coroutines          : "org.jetbrains.kotlinx:kotlinx-coroutines-android:${versions.coroutines}",
+            coroutinesTest      : "org.jetbrains.kotlinx:kotlinx-coroutines-test:${versions.coroutines}",
             detektKtlint        : "io.gitlab.arturbosch.detekt:detekt-formatting:${versions.detekt}",
             hilt                : "com.google.dagger:hilt-android:${versions.hilt}",
             hiltCompiler        : "com.google.dagger:hilt-compiler:${versions.hilt}",
             junit               : "junit:junit:${versions.junit}",
+            mapsPlayServices    : "com.google.android.gms:play-services-maps:${versions.playServices}",
             material            : "com.google.android.material:material:${versions.material}",
             mockito             : "org.mockito.kotlin:mockito-kotlin:${versions.mockito}",
+            moshi               : "com.squareup.moshi:moshi-kotlin:${versions.moshi}",
+            moshiCodegen        : "com.squareup.moshi:moshi-kotlin-codegen:${versions.moshi}",
             tensorflowVision    : "org.tensorflow:tensorflow-lite-task-vision:${versions.tensorflowVision}"
     ]
 }
