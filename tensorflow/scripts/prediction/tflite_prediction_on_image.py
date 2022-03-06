@@ -1,8 +1,14 @@
+"""
+Loads a model and makes predictions
+Base code from: https://colab.research.google.com/github/khanhlvg/tflite_raspberry_pi/blob/main/object_detection/Train_custom_model_tutorial.ipynb
+"""
+
 import numpy as np 
 import platform
 from typing import List, NamedTuple
 import json
 import glob
+import time
 
 import cv2
 from PIL import Image
@@ -17,8 +23,8 @@ from absl import logging
 logging.set_verbosity(logging.ERROR)
 
 
-INPUT_FILE = "./../../data/old/test/" #@param {type:"string"}
-TFLITE_MODEL_PATH = "./../../model/efficientdet_lite0-1646086803.122067.tflite" #@param {type:"string"}
+INPUT_FILE = "./../../data/test/" #@param {type:"string"}
+TFLITE_MODEL_PATH = "./../../model/efficientdet_lite0-1646413533.2708564.tflite" #@param {type:"string"}
 DETECTION_THRESHOLD = 0.15 #@param {type:"number"}
 MAX_RESULTS = 5
 NUM_THREADS = 4
@@ -349,6 +355,8 @@ def visualize(
 
 def main():
     for input_image in glob.glob(f"{INPUT_FILE}*.jpg"):
+        start = time.time()
+
         #image = Image.open(INPUT_IMAGE).convert('RGB')
         image = Image.open(input_image).convert('RGB')
         image.thumbnail((512, 512), Image.ANTIALIAS)

@@ -32,7 +32,7 @@ internal fun DetailsScreen(
         modifier = modifier
     ) {
         Header(
-            title = apple.name,
+            title = "${apple.name} (${apple.confidence}%)",
             description = apple.description,
             picture = apple.picture
         )
