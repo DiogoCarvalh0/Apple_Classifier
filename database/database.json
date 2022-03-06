@@ -2,7 +2,7 @@
     {
        "id":"Bravo de Esmolfe",
        "name":"Bravo de Esmolfe",
-       "image":"https://",
+       "image":"https://i.imgur.com/VNEYROQ.png",
        "flavour":"Intense with a soft and sweet pulp",
        "location":{
           "name":"Penalva do Castelo, Portugal 🇵🇹"
@@ -11,7 +11,7 @@
     {
         "id":"Fuji",
         "name":"Fuji",
-        "image":"https://",
+        "image":"https://i.imgur.com/dn08P0z.png",
         "flavour":"Crisp and very juicy with a sugary-sweet flavor, making it ultra refreshing",
         "location":{
            "name":"Fujisaki, Japan 🇯🇵"
@@ -20,7 +20,7 @@
      {
         "id":"Pink Lady",
         "name":"Pink Lady",
-        "image":"https://",
+        "image":"https://i.imgur.com/OvTSmPH.png",
         "flavour":"Sweet with high sugars and high acids, with a crisp bite",
         "location":{
            "name":"Western Australia, Australia 🇦🇺"
@@ -29,7 +29,7 @@
      {
         "id":"Golden Delicious",
         "name":"Golden Delicious",
-        "image":"https://",
+        "image":"https://i.imgur.com/5CTGfx9.png",
         "flavour":"Very sweet, like honey, and slightly tart but not bitter",
         "location":{
            "name":"West Virginia, United States of America 🇺🇸"
@@ -38,7 +38,7 @@
      {
         "id":"Royal Gala",
         "name":"Royal Gala",
-        "image":"https://",
+        "image":"https://i.imgur.com/TlKeShE.png",
         "flavour":"Thin pulp, with a sweet, aromatic, slightly acidic, and fragrant flavour",
         "location":{
            "name":"Wellington, New Zealand 🇳🇿"
