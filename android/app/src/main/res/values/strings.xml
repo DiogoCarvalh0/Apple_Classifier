@@ -6,4 +6,7 @@
     <string name="grant_permission">Grant Camera Permission</string>
     <string name="camera_permission_denied">Without the camera permission you cannot use this app. Please grant it in settings.</string>
     <string name="open_settings">Open Settings</string>
+    <string name="country">Country</string>
+    <string name="flavour">Flavour</string>
+    <string name="confidence">Detection confidence</string>
 </resources>

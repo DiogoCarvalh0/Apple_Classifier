@@ -48,7 +48,7 @@ internal class DatabaseTest {
             "{" +
             "   \"id\":\"Fuji\"," +
             "   \"name\":\"Fuji\"," +
-            "   \"description\":\"\"," +
+            "   \"flavour\":\"\"," +
             "   \"image\":\"\"," +
             "   \"location\":{\n" +
             "       \"name\":\"Japan\"" +
