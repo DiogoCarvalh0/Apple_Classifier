@@ -10,9 +10,8 @@ internal data class Apple(
 
 internal val SAMPLE = Apple(
     name = "Fugi",
-    description = "The Fuji apple is an apple cultivar developed by growers at Tohoku Research Station in Fujisaki" +
-        ", Aomori, Japan, in the late 1930s, and brought to market in 1962.",
-    confidence = 50,
+    description = "Crisp and very juicy with a sugary-sweet flavor, making it ultra refreshing.",
+    confidence = 62,
     picture = "https://i.imgur.com/dn08P0z.png",
-    origin = "Portugal"
+    origin = "Fujisaki, Japan \uD83C\uDDEF\uD83C\uDDF5"
 )

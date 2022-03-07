@@ -9,7 +9,6 @@ import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.google.accompanist.insets.navigationBarsPadding
 import dagger.hilt.android.AndroidEntryPoint
 import pt.carvalho.apples.classifier.navigation.Router
 import pt.carvalho.apples.classifier.permission.PermissionManager
@@ -59,7 +58,6 @@ class MainActivity : ComponentActivity() {
             sheetContent = {
                 if (displayState is MainViewModel.DisplayData.DetectedObject) {
                     DetailsScreen(
-                        modifier = Modifier.navigationBarsPadding(),
                         apple = displayState.value
                     )
                 }

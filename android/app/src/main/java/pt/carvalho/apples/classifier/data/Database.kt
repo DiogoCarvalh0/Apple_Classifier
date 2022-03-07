@@ -12,7 +12,7 @@ internal data class Apple(
     val id: String,
     @Json(name = "name")
     val name: String,
-    @Json(name = "description")
+    @Json(name = "flavour")
     val description: String,
     @Json(name = "image")
     val image: String,

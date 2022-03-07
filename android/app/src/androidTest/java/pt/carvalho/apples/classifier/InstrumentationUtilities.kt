@@ -1,8 +1,11 @@
 package pt.carvalho.apples.classifier
 
+import android.content.Context
 import androidx.test.platform.app.InstrumentationRegistry
 import java.io.File
 import java.io.InputStream
+
+internal fun context(): Context = InstrumentationRegistry.getInstrumentation().targetContext
 
 internal fun string(id: Int): String =
     InstrumentationRegistry.getInstrumentation().targetContext.getString(id)

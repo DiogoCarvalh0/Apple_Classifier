@@ -42,7 +42,7 @@ import kotlin.math.abs
 internal data class TestCase(
     val folder: String,
     val filename: String = "",
-    val maxErrorPercentage: Float = 0.5f
+    val maxErrorPercentage: Float = 3.0f
 ) {
     fun safeFolderPathname(): String = folder.replace("/", "_")
 }
