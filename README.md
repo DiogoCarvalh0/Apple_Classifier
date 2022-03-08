@@ -9,5 +9,5 @@ A small Android application that tells you which type of apple you are looking a
 ### 🤖 [Android](./android/)
 The Android project, responsible for capturing the device's camera feed and calling the Tensorflow model with it's frames.
 
-### 🧑‍🔬 [Tensorflow](./tensorflow/)
+### 🧑‍🔬 [TensorFlow](./tensorflow/)
 The project that builds and trains the Apple Tensorflow model used by the Android app.
